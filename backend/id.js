@@ -90,6 +90,21 @@ export function to_a_token(num) {
 
 }
 
+export function is_valid(token) {
+    if (!token || !token.length || token.length != symbol_count) {
+        return false;
+    }
+
+    for (let i = 0; i < token.length; i++) {
+        const number = token.charCodeAt(i);
+        if(!(number >= 'a'.charCodeAt(0) && number <= 'z'.charCodeAt(0)
+            || number >= 'A'.charCodeAt(0) && number <= 'Z'.charCodeAt(0)
+            || number >= '0'.charCodeAt(0) && number <= '9'.charCodeAt(0))){
+            return false;
+        }
+    }
+    return true;
+}
 
 function test() {
 
