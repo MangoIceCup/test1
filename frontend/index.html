@@ -59,7 +59,7 @@
             <button id="btn">Generate</button>
         </div>
         <div class="result">
-            <a href="#" id="result" target="_blank">https://sl.sh/Hu7ds</a>
+            <a href="#" id="result" target="_blank"></a>
         </div>
     </div>
 </div>
@@ -69,23 +69,27 @@
     const result = document.getElementById('result');
 
     btn.addEventListener('click', async function () {
-        const link = txt.value.trim();
-        const response = await (await fetch('http://localhost:3000/short-link', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                link
-            }),
-            credentials: "omit",
-            mode: "cors"
-        })).json()
+        try {
+            const link = txt.value.trim();
+            const response = await (await fetch('http://localhost:3000/short-link', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    link
+                }),
+                credentials: "omit",
+                mode: "cors"
+            })).json();
 
-        const token = response.token;
-        const short_link = "http://localhost:3000/"+token;
-        result.innerText = short_link;
-        result.href = short_link;
+            const token = response.token;
+            const short_link = "http://localhost:3000/" + token;
+            result.innerText = short_link;
+            result.href = short_link;
+        } catch (e) {
+            alert('something went wrong')
+        }
     });
 
 </script>
